@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+
 /**
  * Created by rodrigobresan on 5/10/17.
  * <p>
@@ -18,7 +21,6 @@ import org.mockito.Mockito;
 public class LoginTest {
 
     private Database mockedDatabase;
-    private UserRegistration userRegistration;
 
     @Before
     public void setup() {
@@ -28,6 +30,8 @@ public class LoginTest {
     @Test(expected = UserAlreadyRegisteredException.class)
     public void shouldThrowUserAlreadyRegisteredException() throws UserAlreadyRegisteredException {
         UserRegistration userRegistration = new UserRegistration(mockedDatabase);
+
+        when(mockedDatabase.hasUser(anyString())).thenReturn(true);
 
         userRegistration.registerNewUser("rodrigo.bresan@email.com");
     }
