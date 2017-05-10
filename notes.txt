@@ -196,6 +196,15 @@ Mockito.verify(mockDatabase.addUser(emailAddress)) - WRONG
 It will throw NotAMockException :-)
 
 
+======
+
+Also we can use Mockito with our android tests, as shown in the file SecondActivityTest.class. There
+you can see we are testing if the intent values are being properly filled. Pretty handful for us
+when we start dealing with big screens that receive lots of values and that in some scenarios may
+lead us to write buggy code.
+
+
+
 
 
 
