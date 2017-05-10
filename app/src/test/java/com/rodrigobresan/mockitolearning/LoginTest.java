@@ -51,7 +51,7 @@ public class LoginTest {
         // add the user
         when(mockedDatabase.hasUser(email)).thenReturn(false);
 
-        when(emailSender.sendRegistrationEmail((RegistrationEmail) any())).thenReturn(true);
+        when(emailSender.sendRegistrationEmail(any(RegistrationEmail.class))).thenReturn(true);
 
         userRegistration.registerNewUser(email);
 
