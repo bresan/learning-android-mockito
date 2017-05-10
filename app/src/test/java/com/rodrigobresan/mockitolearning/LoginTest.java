@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -21,18 +22,29 @@ import static org.mockito.Mockito.when;
 public class LoginTest {
 
     private Database mockedDatabase;
+    private UserRegistration userRegistration;
 
     @Before
     public void setup() {
         mockedDatabase = Mockito.mock(Database.class);
+        userRegistration = new UserRegistration(mockedDatabase);
     }
 
     @Test(expected = UserAlreadyRegisteredException.class)
     public void shouldThrowUserAlreadyRegisteredException() throws UserAlreadyRegisteredException {
-        UserRegistration userRegistration = new UserRegistration(mockedDatabase);
-
         when(mockedDatabase.hasUser(anyString())).thenReturn(true);
-
         userRegistration.registerNewUser("rodrigo.bresan@email.com");
+    }
+
+    @Test
+    public void shouldAddNewUserToDatabase() throws UserAlreadyRegisteredException {
+        String email = "rodrigo.bresan@email.com";
+
+        // now that our mocked database will return false, it will follow until the end and
+        // add the user
+        when(mockedDatabase.hasUser(email)).thenReturn(false);
+
+        userRegistration.registerNewUser(email);
+        verify(mockedDatabase).addUser(email);
     }
 }
