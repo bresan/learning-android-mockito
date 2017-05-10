@@ -38,7 +38,7 @@ shouldThrowUserAlreadyRegisteredException in the LoginTest class.
    public void shouldThrowUserAlreadyRegisteredException() throws UserAlreadyRegisteredException {
        UserRegistration userRegistration = new UserRegistration(mockedDatabase);
        when(mockedDatabase.hasUser(anyString())).thenReturn(true);
-       userRegistration.registerNewUser("rodrigo.bresan@email.com");
+       userRegistration.registerNewUser("rodrigo.bresan@destinationEmail.com");
    }
 
 You can notice we have the call for the method when(), that was statically imported from the package
@@ -58,7 +58,7 @@ component, and not it's dependencies.
 
 ======
 
-What does it make a good unit test?
+What does make a good unit test?
 
 Being fast.
 
@@ -121,6 +121,76 @@ Why use a mock?
     a. which methods will be called
     b. in which order
     c. how many times (maybe never)
+
+Using the method verify on the Mockito class we can check if a specific method of our mock was called
+or not.
+
+We can use the same object as many entities, such as a stub and a mock. Example:
+
+On the following call, the object will be used as a stub, since it will be returning a hardcoded
+value based on a certain scenario.
+
+Mockito.when(yourMock.yourMethod()).thenReturn(false);
+
+In the following one, you will see we are just verifying if the method was called or not, so it's
+simply a mock.
+
+Mockito.verify(yourMock).yourMethod();
+
+=====
+
+Creating stubs
+
+So far we've been using the Mockito.when method, but we can also use the method
+doReturn(value).when(yourMock).yourMethod(anyString())
+
+Mockito.when() only work for methods that return something, not workable for void methods. If you try
+to stub a method that doesn't have a return type (is void), you will receive the
+CannotStubVoidMethodWithReturnValue exception. For these cases (without return method) we should use
+the following syntax:
+
+Let't say we have the method delete, without any return type. We would do in the following way:
+
+Mockito.doThrow(UserNotFoundException.class).when(mockDatabase).deleteUser(destinationEmail);
+
+// and then call userRegistration.delete(destinationEmail) to test it.
+
+Which syntax to use?
+
+It's a matter of personal preference. The benefit of the doThrow method is that it does allow the usage
+even for non returning methods. But for readability the easier for understanding (in my opinion :D)
+is the when/then. In any way, compiler will keep you on the right track (about trying to do it on
+void return methods).
+
+Default return methods provided by Mockito:
+
+- primitives (int, boolean);
+- wrapper around primitives (Integer);
+- collections (ArrayList);
+
+======
+
+Matchers
+
+anyString()
+
+Let's say you want Mockito to check when a method is called, but this with any different String. How
+could you do it? You could do it as follows:
+
+when(mockDatabase.hasUser(anyString()).thenReturn(true);
+
+With this call, the method hasUser will accept any kind of string you specify. If you want to assert
+null values, you need to use the ArgumentMatchers.any() method, casted to a String object.
+
+We do have many different matchers, such as anyDouble, anyFloat, anyBoolean, anyMap, etc..
+
+
+
+
+
+
+
+
 
 
 

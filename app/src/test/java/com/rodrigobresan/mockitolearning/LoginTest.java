@@ -1,6 +1,8 @@
 package com.rodrigobresan.mockitolearning;
 
 import com.rodrigobresan.mockitolearning.model.Database;
+import com.rodrigobresan.mockitolearning.model.EmailFailedException;
+import com.rodrigobresan.mockitolearning.model.EmailSender;
 import com.rodrigobresan.mockitolearning.model.UserAlreadyRegisteredException;
 import com.rodrigobresan.mockitolearning.model.UserRegistration;
 
@@ -23,21 +25,24 @@ public class LoginTest {
 
     private Database mockedDatabase;
     private UserRegistration userRegistration;
+    private EmailSender emailSender;
 
     @Before
     public void setup() {
         mockedDatabase = Mockito.mock(Database.class);
-        userRegistration = new UserRegistration(mockedDatabase);
+        emailSender = Mockito.mock(EmailSender.class);
+
+        userRegistration = new UserRegistration(mockedDatabase, emailSender);
     }
 
     @Test(expected = UserAlreadyRegisteredException.class)
-    public void shouldThrowUserAlreadyRegisteredException() throws UserAlreadyRegisteredException {
+    public void shouldThrowUserAlreadyRegisteredException() throws UserAlreadyRegisteredException, EmailFailedException {
         when(mockedDatabase.hasUser(anyString())).thenReturn(true);
         userRegistration.registerNewUser("rodrigo.bresan@email.com");
     }
 
     @Test
-    public void shouldAddNewUserToDatabase() throws UserAlreadyRegisteredException {
+    public void shouldAddNewUserToDatabase() throws UserAlreadyRegisteredException, EmailFailedException {
         String email = "rodrigo.bresan@email.com";
 
         // now that our mocked database will return false, it will follow until the end and
@@ -45,6 +50,8 @@ public class LoginTest {
         when(mockedDatabase.hasUser(email)).thenReturn(false);
 
         userRegistration.registerNewUser(email);
+
+        // check if our addUser method on our mocked database was called
         verify(mockedDatabase).addUser(email);
     }
 }
