@@ -184,8 +184,16 @@ null values, you need to use the ArgumentMatchers.any() method, casted to a Stri
 
 We do have many different matchers, such as anyDouble, anyFloat, anyBoolean, anyMap, etc..
 
+=====
 
 
+Pay attention to the method verify, since we need to specify the mock and then later the method we
+are calling, not both together. Example:
+
+Mockito.verify(mockDatabase).addUser(emailAddress) - RIGHT
+Mockito.verify(mockDatabase.addUser(emailAddress)) - WRONG
+
+It will throw NotAMockException :-)
 
 
 
