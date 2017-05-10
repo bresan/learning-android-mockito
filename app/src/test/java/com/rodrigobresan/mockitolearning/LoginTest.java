@@ -3,6 +3,7 @@ package com.rodrigobresan.mockitolearning;
 import com.rodrigobresan.mockitolearning.model.Database;
 import com.rodrigobresan.mockitolearning.model.EmailFailedException;
 import com.rodrigobresan.mockitolearning.model.EmailSender;
+import com.rodrigobresan.mockitolearning.model.RegistrationEmail;
 import com.rodrigobresan.mockitolearning.model.UserAlreadyRegisteredException;
 import com.rodrigobresan.mockitolearning.model.UserRegistration;
 
@@ -10,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -48,6 +50,8 @@ public class LoginTest {
         // now that our mocked database will return false, it will follow until the end and
         // add the user
         when(mockedDatabase.hasUser(email)).thenReturn(false);
+
+        when(emailSender.sendRegistrationEmail((RegistrationEmail) any())).thenReturn(true);
 
         userRegistration.registerNewUser(email);
 
