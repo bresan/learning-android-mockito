@@ -1,7 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
-          package="com.rodrigobresan.mockitolearning"
-    >
+          package="com.rodrigobresan.mockitolearning">
 
     <application
         android:allowBackup="true"
