@@ -1,4 +1,4 @@
-package com.rodrigobresan.mockitolearning.model;
+package exception;
 
 /**
  * Created by rodrigobresan on 5/10/17.

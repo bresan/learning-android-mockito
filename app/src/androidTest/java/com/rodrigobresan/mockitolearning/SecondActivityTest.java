@@ -12,6 +12,7 @@ import view.SecondActivity;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
+import static view.SecondActivity.EXTRA_INTENT_EMAIL;
 
 /**
  * Created by rodrigobresan on 5/10/17.
@@ -23,12 +24,16 @@ import static junit.framework.Assert.assertNotNull;
 @RunWith(AndroidJUnit4.class)
 public class SecondActivityTest {
 
+    private static final String EXTRA_INTENT_VALUE_EMAIL = "rcbresan@email.com";
+
+
     @Test
     public void shouldContainTheCorrectExtras() throws Exception {
         Context context = Mockito.mock(Context.class);
 
-        Intent intent = SecondActivity.provideIntent(context, "rcbresan@email.com");
+        Intent intent = SecondActivity.provideIntent(context, EXTRA_INTENT_VALUE_EMAIL);
         assertNotNull(intent);
-        assertEquals("rcbresan@email.com", intent.getSerializableExtra("email"));
+        assertEquals(EXTRA_INTENT_VALUE_EMAIL, intent.getSerializableExtra(EXTRA_INTENT_EMAIL));
     }
+
 }

@@ -13,9 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 
 public class SecondActivity extends AppCompatActivity {
 
+    public static final String EXTRA_INTENT_EMAIL = "email";
+
     public static Intent provideIntent(Context context, String email) {
         Intent intent = new Intent(context, SecondActivity.class);
-        intent.putExtra("email", email);
+        intent.putExtra(EXTRA_INTENT_EMAIL, email);
         return intent;
     }
 }

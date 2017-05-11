@@ -1,5 +1,8 @@
 package com.rodrigobresan.mockitolearning.model;
 
+import exception.EmailFailedException;
+import exception.UserAlreadyRegisteredException;
+
 /**
  * Created by rodrigobresan on 5/10/17.
  * <p>
