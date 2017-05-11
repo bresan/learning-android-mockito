@@ -58,8 +58,6 @@ to write the code for it, since this dependency would be directly inside the cod
 through the constructor (or through any other Dependency Injection framework) you would use. Keep in mind that we are trying to test only the UserRegistration class in this test, not the database.
 The point in unit testing is to isolate the component in order to achieve the test of only a single component, and not it's dependencies.
 
-======
-
 ### What makes a good unit test?
 
 #### Being fast
@@ -172,8 +170,6 @@ Default return methods provided by Mockito:
 - wrapper around primitives (Integer);
 - collections (ArrayList);
 
-======
-
 ### Matchers
 
 anyString()
@@ -190,8 +186,6 @@ null values, you need to use the ArgumentMatchers.any() method, casted to a Stri
 
 We do have many different matchers, such as anyDouble, anyFloat, anyBoolean, anyMap, etc..
 
-=====
-
 
 Pay attention to the method verify, since we need to specify the mock and then later the method we
 are calling, not both together. Example:
@@ -202,9 +196,6 @@ Mockito.verify(mockDatabase.addUser(emailAddress)); //WRONG
 ```
 
 It will throw NotAMockException :-)
-
-
-======
 
 Also we can use Mockito with our android tests, as shown in the file **SecondActivityTest.class**. There
 you can see we are testing if the intent values are being properly filled. Pretty handful for us
