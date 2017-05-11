@@ -1,6 +1,6 @@
-#Android Learning Series: Mockito
+# Android Learning Series: Mockito
 
-###Why to use Mockito?
+### Why to use Mockito?
 
 Mockito is a powerful way to mock our dependencies in order to allow us to unit test our code.
 
@@ -60,22 +60,22 @@ The point in unit testing is to isolate the component in order to achieve the te
 
 ======
 
-###What makes a good unit test?
+### What makes a good unit test?
 
-####Being fast
+#### Being fast
 
 We want our Unit Tests to be fast, so for us not having any Network calls or I/O operations (such as reading files, databases, etc) that can make it to be delayed and slowed down. We need to have in mind that our projects may have thousands of unit tests on it, so we need a test suit that can run fast, preferably in a matter of seconds and not relying on third party components.
 
-####Being deterministic
+#### Being deterministic
 
 The test should fail 100% of time or pass 100% of time. Tests that don't follow this standard are called **flakey** tests, and they can undermine our confidence in our test suit.
 
-####Being self-contained
+#### Being self-contained
 
 Tests shouldn't rely on any other tests. As well it shouldn't rely in any external state (such as the result of any other test). Also shouldn't rely on a database being populated in a certain way
 if other tests might alter it.
 
-####Being focused
+#### Being focused
 
 As the own name says, unit tests should be testing only a unit of the code. Don't make test for a class and all of its dependencies at the same time. Just interact with a small number of classes,
 being pretty often just the one you are testing.
@@ -97,22 +97,22 @@ Use a test double instead of a database object, otherwise tests could be:
 
 Think of this as a Java Interface.
 
-###Dummy Object
+### Dummy Object
 
 Object passed that is never used, just for filling parameters. Just for compiler being happy :-)
 
-###Fake Object
+### Fake Object
 
 Real working implementation. It is not supposed to be a code that should be working in production
 code. Example: memory data instead of using a real database.
 
-###Stub Object
+### Stub Object
 
 Configured to provide hardcoded responses. Only under certain conditions. E.x.:
 
 when() method is a example, since it does return a stub once it meets a certain condition.
 
-####Why use a mock?
+#### Why use a mock?
 
 1. To modify the behaviour of one object
 2. To specify in which ways the mock will be interacted with:
@@ -138,7 +138,7 @@ simply a mock.
 Mockito.verify(yourMock).yourMethod();
 ```
 
-#Creating stubs
+# Creating stubs
 
 So far we have been using the Mockito.when method, but we can also use the method
 
@@ -174,7 +174,7 @@ Default return methods provided by Mockito:
 
 ======
 
-###Matchers
+### Matchers
 
 anyString()
 
